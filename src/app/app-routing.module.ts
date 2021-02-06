@@ -18,7 +18,11 @@ const routes: Routes = [
   {
     path: 'add-pessoa',
     loadChildren: () => import('./page/add-pessoa/add-pessoa.module').then( m => m.AddPessoaPageModule)
-  }
+  },
+  {
+    path: 'add-pessoa/:id',
+    loadChildren: () => import('./page/add-pessoa/add-pessoa.module').then( m => m.AddPessoaPageModule)
+  },
 ];
 
 @NgModule({

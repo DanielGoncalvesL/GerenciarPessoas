@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PessoaPage implements OnInit {
 
+  pessoas: any = [];
   constructor() { }
 
   ngOnInit() {
+  }
+
+  async ionViewWillEnter(){
+    this.pessoas = JSON.parse(localStorage.getItem("pessoaBD"));
+    if(!this.pessoas){
+      this.pessoas = [];
+      localStorage.setItem("pessoaBD", JSON.stringify(this.pessoas));
+    }
   }
 
 }

@@ -9,9 +9,9 @@
 
 <ion-content>
     <ion-list>
-        <ion-item-sliding>
-            <ion-item routerLink="/add-pessoa" detail>
-                <ion-label>Pessoa X</ion-label>
+        <ion-item-sliding *ngFor="let pessoa of pessoas">
+            <ion-item [routerLink]="'/add-pessoa/' + pessoa.id" detail>
+                <ion-label>{{pessoa.nome}}</ion-label>
             </ion-item>
             <ion-item-options side="start">
                 <ion-item-options color="danger">Excluir</ion-item-options>
