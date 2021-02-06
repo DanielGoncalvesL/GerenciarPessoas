@@ -1,0 +1,7 @@
+{
+  "name": "GerenciarPessoas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
