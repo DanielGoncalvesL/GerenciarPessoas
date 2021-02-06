@@ -1,9 +1,34 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>addPessoa</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="dark">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Adicionar Pessoa</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <form (ngSubmit)="submitForm()">
+        <ion-item>
+            <ion-label position="floating">Nome</ion-label>
+            <ion-input type="text" name="nome"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Data de Nascimento</ion-label>
+            <ion-datetime name="dataNascimento" doneText="Confirmar" cancelText="Cancelar" displayFormat="DD/MM/YYYY"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">CPF</ion-label>
+            <ion-input type="text" name="cpf"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Telefone</ion-label>
+            <ion-input type="text" name="telefone"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">CEP</ion-label>
+            <ion-input type="text" name="cep"></ion-input>
+        </ion-item>
+        <ion-button type="submit" expand="block" color="primary">Salvar</ion-button>
+    </form>
 </ion-content>
