@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'add-pessoa/:id',
     loadChildren: () => import('./page/add-pessoa/add-pessoa.module').then( m => m.AddPessoaPageModule)
   },
+  {
+    path: 'pessoa/:id',
+    loadChildren: () => import('./page/pessoa/pessoa.module').then( m => m.PessoaPageModule)
+  },
 ];
 
 @NgModule({

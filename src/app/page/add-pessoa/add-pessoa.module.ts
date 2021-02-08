@@ -8,12 +8,15 @@ import { AddPessoaPageRoutingModule } from './add-pessoa-routing.module';
 
 import { AddPessoaPage } from './add-pessoa.page';
 
+import {BrMaskerModule} from 'br-mask';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AddPessoaPageRoutingModule
+    AddPessoaPageRoutingModule,
+    BrMaskerModule
   ],
   declarations: [AddPessoaPage]
 })

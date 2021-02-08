@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from "@ionic/angular";
+import { NavController, AlertController } from "@ionic/angular";
 import { v4 as uuid } from 'uuid';
 
 @Component({
@@ -21,20 +21,13 @@ export class AddPessoaPage implements OnInit {
     cep: null
   };
 
-  constructor(private activatedRoute: ActivatedRoute, private navController: NavController) { }
+  constructor(public alertController: AlertController ,private activatedRoute: ActivatedRoute, private navController: NavController) { }
 
   ngOnInit() {
     this.pessoas = JSON.parse(localStorage.getItem("pessoaBD"));
     if(!this.pessoas){
       this.pessoas = [];
       localStorage.setItem("pessoaBD", JSON.stringify(this.pessoas));
-    }
-
-    this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    if(this.id){
-      this.pessoas[this.id] = this.pessoa;
-    }else{
-      this.pessoas.push(this.pessoa);
     }
 
     this.activatedRoute.params.subscribe( param => {
@@ -52,14 +45,31 @@ export class AddPessoaPage implements OnInit {
   async submitForm(){
     this.pessoas = JSON.parse(localStorage.getItem("pessoaBD"));
 
-    if(this.id){
-      this.pessoas[this.id] = this.pessoa;
+    if(this.pessoas.find( pessoa => pessoa.id === this.pessoa.id)){
+      for(var i = 0; i < this.pessoas.length; i++){
+        if(this.pessoas[i].id == this.pessoa.id){
+          this.pessoas[i] = this.pessoa;
+          this.mostrarAlerta('Editada');
+        }
+      }
     }else{
       this.pessoa.id = uuid();
       this.pessoas.push(this.pessoa);
+      this.mostrarAlerta('Salva');
     }
 
     localStorage.setItem("pessoaBD", JSON.stringify(this.pessoas));
     this.navController.navigateBack('/pessoa');
+  }
+
+  async mostrarAlerta(parametro: string){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Alerta',
+      message: 'Pessoa ' + parametro + ' Com Sucesso!',
+      buttons: ['OK'] 
+    });
+
+    await alert.present();
   }
 }
