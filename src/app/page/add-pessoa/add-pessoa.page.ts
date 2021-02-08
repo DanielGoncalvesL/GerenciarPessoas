@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from "@ionic/angular";
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-add-pessoa',
@@ -35,6 +36,17 @@ export class AddPessoaPage implements OnInit {
     }else{
       this.pessoas.push(this.pessoa);
     }
+
+    this.activatedRoute.params.subscribe( param => {
+      if(param['id']){
+        this.pessoas = JSON.parse(localStorage.getItem("pessoaBD"));
+        for(var i = 0; i < this.pessoas.length; i++){
+          if(this.pessoas[i].id == param['id']){
+            this.pessoa = this.pessoas[i];
+          }
+        }
+      }
+    });
   }
 
   async submitForm(){
@@ -43,6 +55,7 @@ export class AddPessoaPage implements OnInit {
     if(this.id){
       this.pessoas[this.id] = this.pessoa;
     }else{
+      this.pessoa.id = uuid();
       this.pessoas.push(this.pessoa);
     }
 
