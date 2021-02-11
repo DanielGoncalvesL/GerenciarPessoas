@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, AlertController } from "@ionic/angular";
 import { v4 as uuid } from 'uuid';
+import { CepService } from '../../services/cep.service';
 
 @Component({
   selector: 'app-add-pessoa',
@@ -18,10 +19,17 @@ export class AddPessoaPage implements OnInit {
     dataNascimento: null,
     cpf: null,
     telefone:null,
-    cep: null
   };
 
-  constructor(public alertController: AlertController ,private activatedRoute: ActivatedRoute, private navController: NavController) { }
+  endereco: any = {
+    cep: null,
+    logradouro: null,
+    bairro: null,
+    localidade: null,
+    uf: null,
+  };
+
+  constructor(private cepService: CepService ,public alertController: AlertController ,private activatedRoute: ActivatedRoute, private navController: NavController) { }
 
   ngOnInit() {
     this.pessoas = JSON.parse(localStorage.getItem("pessoaBD"));
@@ -71,5 +79,15 @@ export class AddPessoaPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async preencherEndereco(){
+    this.cepService.obterEndereço(this.endereco.cep.replace(/\.|\-/g, ''))
+    .then((endereco) => {
+      this.endereco = endereco;
+    })
+    .catch((erro) => {
+      console.log(erro)
+    });
   }
 }

@@ -27,7 +27,23 @@
         </ion-item>
         <ion-item>
             <ion-label position="floating">CEP</ion-label>
-            <ion-input type="text" name="cep" [(ngModel)]="pessoa.cep" [brmasker]="{mask: '00.000-000', type:'num', len:10}" required></ion-input>
+            <ion-input type="text" name="cep" [(ngModel)]="endereco.cep" (ionBlur)="preencherEndereco()" [brmasker]="{mask: '00.000-000', type:'num', len:10}" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Rua</ion-label>
+            <ion-input type="text" name="rua" [(ngModel)]="endereco.logradouro" [brmasker]="{mask: '00.000-000', type:'num', len:10}" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Bairro</ion-label>
+            <ion-input type="text" name="bairro" [(ngModel)]="endereco.bairro" [brmasker]="{mask: '00.000-000', type:'num', len:10}" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Cidade</ion-label>
+            <ion-input type="text" name="cidade" [(ngModel)]="endereco.localidade" [brmasker]="{mask: '00.000-000', type:'num', len:10}" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Estado</ion-label>
+            <ion-input type="text" name="estado" [(ngModel)]="endereco.uf" [brmasker]="{mask: '00.000-000', type:'num', len:10}" required></ion-input>
         </ion-item>
         <ion-button type="submit" expand="block" color="primary">Salvar</ion-button>
     </form>
