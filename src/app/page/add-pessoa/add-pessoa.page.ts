@@ -87,7 +87,12 @@ export class AddPessoaPage implements OnInit {
       this.endereco = endereco;
     })
     .catch((erro) => {
-      console.log(erro)
+      console.log(erro);
+      this.endereco.cep = null;
+      this.endereco.logradouro = null;
+      this.endereco.bairro = null;
+      this.endereco.localidade = null;
+      this.endereco.uf = null;
     });
   }
 }
